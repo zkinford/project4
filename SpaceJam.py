@@ -3,6 +3,7 @@ from panda3d.core import *
 from direct.task import *
 from panda3d.core import CollisionTraverser, CollisionHandlerPusher
 from CollideObjectBase import PlacedObject
+from CollideObjectBase import *
 
 import DefensePaths as defensePaths
 import SpaceJamClasses as spaceJamClasses
@@ -24,6 +25,13 @@ class SpaceJam(ShowBase):
         self.SpaceStation1 = spaceJamClasses.SpaceStation(self.loader, "./Assets/Space Station/spaceStation.egg", self.render, 'Space Station', "./Assets/Space Station/SpaceStation1_Dif2.png", (1500, 1000, -100), 40)
         self.Hero = spaceJamClasses.Spaceship(self.loader, self.taskMgr, self.render, "./Assets/Dumbledore/Dumbledore.egg", self.render, 'Hero', "./Assets/Dumbledore/spacejet_C.png", Vec3(1000, 1200, -50), 50)
 
+        self.cTrav = CollisionTraverser()
+        self.cTrav.traverse(self.render)
+        self.pusher = CollisionHandlerPusher()
+        #self.pusher.addCollider(self.Hero.collisionNode, self.Hero.modelNode)
+        #self.cTrav.addCollider(self.Hero.collisionNode, self.pusher)
+        self.cTrav.showCollisions(self.render)
+
         self.SetCamera()
 
         fullCycle = 60
@@ -38,13 +46,6 @@ class SpaceJam(ShowBase):
         self.DrawCircleXYDefense()
         self.DrawCircleXZDefense()
         self.DrawCircleYZDefense()
-
-        self.cTrav = CollisionTraverser()
-        self.cTrav.traverse(self.render)
-        self.pusher = CollisionHandlerPusher()
-        #self.pusher.addCollider(self.Hero.collisionNode, self.Hero.modelNode)
-        #self.cTrav.addCollider(self.Hero.collisionNode, self.pusher)
-        self.cTrav.showCollisions(self.render)
 
     def DrawCircleXYDefense(self):
         self.parent = self.loader.loadModel('./Assets/DroneDefender/DroneDefender.obj')

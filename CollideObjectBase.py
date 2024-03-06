@@ -53,9 +53,11 @@ class SpaceStation(CapsuleCollidableObject):
         super(SpaceStation, self).__init__(loader, modelPath, parentNode, nodeName, 1, -1, 5, 1, -1, -5, 10)
         self.modelNode.setPos(posVec)
         self.modelNode.setScale(scaleVec)
+        self.collisionNode.show()
     
 class Spaceship(SphereCollideObj):
     def __init__(self, loader: Loader, modelPath: str, parentNode: NodePath, nodeName: str, posVec: Vec3, scaleVec: float):
         super(Spaceship, self).__init__(loader, modelPath, parentNode, nodeName, 1, -1, 5, 1, -1, -5, 10)
         self.modelNode.setPos(posVec)
         self.modelNode.setScale(scaleVec)
+        self.collisionNode.show()
